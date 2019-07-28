@@ -37,25 +37,21 @@ setInterval(() => {
     });
 }, 60 * 1000);
 
-app.get("/cache/top5", (req, res) => {
-  return client.get(topAuthors, (err, authors) => {
-    if (authors) {
-      return res.json({ source: "cache", data: JSON.parse(authors) });
-    } else {
-      return res.json({ source: "cache", data: [] });
-    }
-  });
-});
+// Helper function that returns requested contents of the Redis store
+function getCachedData(redisKey) {
+  return (req, res) =>
+    client.get(redisKey, (err, data) => {
+      if (data) {
+        return res.json({ source: "cache", data: JSON.parse(data) });
+      } else {
+        return res.json({ source: "cache", data: [] });
+      }
+    });
+}
 
-app.get("/cache/authors", (req, res) => {
-  return client.get(allAuthors, (err, authors) => {
-    if (authors) {
-      return res.json({ source: "cache", data: JSON.parse(authors) });
-    } else {
-      return res.json({ source: "cache", data: [] });
-    }
-  });
-});
+app.get("/cache/top5", getCachedData(topAuthors));
+
+app.get("/cache/authors", getCachedData(allAuthors));
 
 const port = process.env.PORT || 3000;
 
