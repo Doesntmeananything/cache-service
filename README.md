@@ -1,6 +1,6 @@
-# Caching service
+# Cache service
 
-Part of the microservices interview task. The rest of the microservices [can be found here.](https://github.com/Doesntmeananything/microservices-task)
+Part of the microservices interview task. The related microservices [can be found here.](https://github.com/Doesntmeananything/microservices-task)
 
 ## Description
 
