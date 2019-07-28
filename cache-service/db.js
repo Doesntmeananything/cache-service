@@ -22,4 +22,16 @@ function fetchTopAuthors() {
     });
 }
 
-module.exports = { fetchTopAuthors };
+function fetchAllAuthors() {
+  return sequelize
+    .query("SELECT name, id FROM authors", {
+      type: sequelize.QueryTypes.SELECT
+    })
+    .then(authors => authors)
+    .catch(error => {
+      console.log(error);
+      return res.json(error.toString());
+    });
+}
+
+module.exports = { fetchTopAuthors, fetchAllAuthors };
