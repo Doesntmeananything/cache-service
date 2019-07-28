@@ -11,6 +11,6 @@
   },
   "scripts": {
     "start": "pm2-runtime start ecosystem.config.js --env production",
-    "stop": "pm2-runtime stop ecosystem.config.js --env production"
+    "stop": "pm2-runtime stop ecosystem.config.js"
   }
 }
